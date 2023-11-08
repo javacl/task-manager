@@ -1,5 +1,6 @@
 package sample.task.manager.features.task.data.dto
 
+import androidx.compose.runtime.Immutable
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.squareup.moshi.JsonClass
@@ -7,6 +8,7 @@ import sample.task.manager.features.task.data.entity.TaskAlarmEntity
 import sample.task.manager.features.task.data.entity.TaskEntity
 import sample.task.manager.features.task.data.model.TaskModel
 
+@Immutable
 @JsonClass(generateAdapter = true)
 data class TaskDto(
     @Embedded

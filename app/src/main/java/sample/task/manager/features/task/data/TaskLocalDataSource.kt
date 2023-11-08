@@ -14,7 +14,7 @@ class TaskLocalDataSource @Inject constructor(
     private val taskDao: TaskDao
 ) {
     fun getTaskList() = taskDao.getTaskList().map {
-        it?.map { item -> item.toTaskModel() }
+        it?.map { item -> item.toTaskModel() }?.sortedByDescending { item -> item.time }
     }
 
     fun getTask(id: Int) = taskDao.getTask(id).map {

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -34,8 +35,10 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import sample.task.manager.R
 import sample.task.manager.core.theme.w300
+import sample.task.manager.core.theme.w400
 import sample.task.manager.core.theme.w500
 import sample.task.manager.core.theme.w700
+import sample.task.manager.core.theme.w900
 import sample.task.manager.core.theme.x2
 import sample.task.manager.core.theme.x4
 import sample.task.manager.core.util.extensions.parseServerErrorMessage
@@ -48,6 +51,9 @@ import sample.task.manager.core.util.ui.AppCard
 import sample.task.manager.core.util.ui.AppSwipeRefresh
 import sample.task.manager.features.main.ui.theme.ThemeUtil
 import sample.task.manager.features.task.data.model.TaskModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(
     ExperimentalMaterialApi::class,
@@ -141,7 +147,7 @@ fun TaskListToolbarItem(
         ) {
             Text(
                 text = stringResource(id = R.string.label_app_name),
-                style = MaterialTheme.typography.w700.x4,
+                style = MaterialTheme.typography.w900.x4,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -150,7 +156,7 @@ fun TaskListToolbarItem(
             Text(
                 modifier = Modifier.padding(top = 4.dp),
                 text = stringResource(id = R.string.txt_app_detail),
-                style = MaterialTheme.typography.w300.x2,
+                style = MaterialTheme.typography.w400.x2,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -191,9 +197,46 @@ fun TaskListItem(
         ) {
             Text(
                 text = item.text,
-                style = MaterialTheme.typography.w500.x4,
+                style = MaterialTheme.typography.w700.x4,
                 color = MaterialTheme.colorScheme.onSurface
             )
+
+            if (!item.title.isNullOrEmpty() || !item.description.isNullOrEmpty()) {
+
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            if (!item.title.isNullOrEmpty()) {
+
+                Text(
+                    text = item.title,
+                    style = MaterialTheme.typography.w500.x2,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            if (!item.description.isNullOrEmpty()) {
+
+                Text(
+                    text = item.description,
+                    style = MaterialTheme.typography.w300.x2,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            if (item.time != null) {
+
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd  HH:mm:ss", Locale.US)
+                val date = Date(item.time)
+                val time = dateFormat.format(date)
+
+                Text(
+                    modifier = Modifier.padding(top = 8.dp),
+                    text = time,
+                    style = MaterialTheme.typography.w700.x2,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
 
             Row(
                 modifier = Modifier
