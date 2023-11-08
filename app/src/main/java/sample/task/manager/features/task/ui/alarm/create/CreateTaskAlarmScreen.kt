@@ -24,8 +24,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import sample.task.manager.R
+import sample.task.manager.core.theme.w400
 import sample.task.manager.core.theme.w600
 import sample.task.manager.core.theme.w900
+import sample.task.manager.core.theme.x2
 import sample.task.manager.core.theme.x4
 import sample.task.manager.core.util.extensions.parseValidationErrorMessage
 import sample.task.manager.core.util.ui.AppBottomSheetColumn
@@ -87,6 +89,13 @@ fun CreateTaskAlarmScreen(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     text = stringResource(id = if (task?.time == null) R.string.label_create_alarm else R.string.label_edit_alarm),
                     style = MaterialTheme.typography.w900.x4,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Text(
+                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    text = task?.text ?: "",
+                    style = MaterialTheme.typography.w400.x2,
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
