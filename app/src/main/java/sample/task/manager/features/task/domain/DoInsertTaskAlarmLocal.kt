@@ -43,6 +43,8 @@ class DoInsertTaskAlarmLocal @Inject constructor(
 
         if (secondsLaterFromNow < 5) {
             validate.secondsLaterFromNow.add(ValidateKeys.MinSeconds)
+        } else if (secondsLaterFromNow > 3600) {
+            validate.secondsLaterFromNow.add(ValidateKeys.MaxSeconds)
         }
 
         return validate

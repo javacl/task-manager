@@ -6,6 +6,7 @@
     <string name="error_connection">Connect to Internet</string>
 
     <string name="msg_min_seconds">At least 5 seconds is allowed</string>
+    <string name="msg_max_seconds">A maximum of 3,600 seconds is allowed</string>
 
     <string name="txt_app_detail">alarm manager for tasks</string>
 

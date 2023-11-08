@@ -63,7 +63,7 @@ class CreateTaskAlarmViewModel @Inject constructor(
     }
 
     fun setSecondsLaterFromNow(value: String) {
-        if (value.length <= 6) {
+        if (value.length <= 4) {
             _secondsLaterFromNow.value = value.filter { it.isDigit() }
             setNotValidSecondsLaterFromNow(false)
         }
