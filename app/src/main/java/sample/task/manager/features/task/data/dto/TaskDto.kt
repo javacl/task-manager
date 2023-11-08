@@ -16,13 +16,13 @@ data class TaskDto(
         entityColumn = "taskId",
         entity = TaskAlarmEntity::class
     )
-    val taskAlarm: TaskAlarmEntity = TaskAlarmEntity()
+    val taskAlarm: TaskAlarmEntity? = null
 ) {
     fun toTaskModel() = TaskModel(
         id = task.id,
         text = task.text,
-        time = taskAlarm.time,
-        title = taskAlarm.title,
-        description = taskAlarm.description
+        time = taskAlarm?.time,
+        title = taskAlarm?.title,
+        description = taskAlarm?.description
     )
 }

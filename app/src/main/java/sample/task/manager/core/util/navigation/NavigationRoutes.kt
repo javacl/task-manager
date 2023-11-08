@@ -8,6 +8,10 @@ sealed class NavigationRoutes(val route: String) {
         route = "root"
     )
 
+    data object ThemeList : NavigationRoutes(
+        route = "theme_list"
+    )
+
     // Task
     data object TaskList : NavigationRoutes(
         route = "task_list"

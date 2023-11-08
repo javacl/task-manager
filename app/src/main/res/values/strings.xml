@@ -5,8 +5,16 @@
     <string name="error_general">A problem occurred!</string>
     <string name="error_connection">Connect to Internet</string>
 
+    <string name="txt_app_detail">alarm manager for tasks</string>
+
+    <string name="label_app_name">Task manager</string>
     <string name="label_retry">Retry</string>
     <string name="label_i_realized">I realized</string>
     <string name="label_optional">Optional</string>
+    <string name="label_system_default">System default</string>
+    <string name="label_light">Light</string>
+    <string name="label_dark">Dark</string>
+    <string name="label_selected">Selected</string>
+    <string name="label_choose_theme">Select theme</string>
 
 </resources>

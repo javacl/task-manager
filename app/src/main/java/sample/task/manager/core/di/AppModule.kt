@@ -20,6 +20,7 @@ import sample.task.manager.BuildConfig
 import sample.task.manager.core.api.DefaultIfNullFactory
 import sample.task.manager.core.api.TLSSocketFactory
 import sample.task.manager.core.db.AppDb
+import sample.task.manager.core.preferences.PreferencesDataStore
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -30,7 +31,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideMoshi() = Moshi.Builder()
+    fun providePreferencesDataStore(
+        @ApplicationContext context: Context
+    ): PreferencesDataStore = PreferencesDataStore(context)
+
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi = Moshi.Builder()
         .add(DefaultIfNullFactory())
         .addLast(KotlinJsonAdapterFactory())
         .build()
@@ -72,7 +79,7 @@ object AppModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         moshi: Moshi
-    ) = Retrofit.Builder()
+    ): Retrofit = Retrofit.Builder()
         .addConverterFactory(
             MoshiConverterFactory.create(moshi)
         )

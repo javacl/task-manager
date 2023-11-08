@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 data class TaskModel(
     val id: Int = 0,
     val text: String = "",
-    val time: Long = 0L,
-    val title: String = "",
-    val description: String = ""
+    val time: Long? = null,
+    val title: String? = null,
+    val description: String? = null
 )

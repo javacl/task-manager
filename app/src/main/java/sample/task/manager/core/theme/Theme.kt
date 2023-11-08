@@ -1,17 +1,12 @@
 package sample.task.manager.core.theme
 
-import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 
 private val darkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -23,7 +18,8 @@ private val darkColorScheme = darkColorScheme(
     surfaceVariant = md_theme_dark_surfaceVariant,
     onSurfaceVariant = md_theme_dark_onSurfaceVariant,
     error = md_theme_dark_error,
-    onError = md_theme_dark_onError
+    onError = md_theme_dark_onError,
+    scrim = md_theme_dark_scrim
 )
 
 private val lightColorScheme = lightColorScheme(
@@ -36,7 +32,8 @@ private val lightColorScheme = lightColorScheme(
     surfaceVariant = md_theme_light_surfaceVariant,
     onSurfaceVariant = md_theme_light_onSurfaceVariant,
     error = md_theme_light_error,
-    onError = md_theme_light_onError
+    onError = md_theme_light_onError,
+    scrim = md_theme_light_scrim
 )
 
 val ColorScheme.warning: Color
@@ -63,6 +60,10 @@ val ColorScheme.onDisable: Color
     @Composable
     get() = if (isSystemInDarkTheme()) md_theme_dark_onDisable else md_theme_light_onDisable
 
+val ColorScheme.divider: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) md_theme_dark_divider else md_theme_light_divider
+
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -72,15 +73,6 @@ fun AppTheme(
         darkColorScheme
     } else {
         lightColorScheme
-    }
-
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-        }
     }
 
     MaterialTheme(

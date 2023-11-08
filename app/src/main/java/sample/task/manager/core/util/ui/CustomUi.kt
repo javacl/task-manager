@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldColors
@@ -62,6 +63,7 @@ import sample.task.manager.R
 import sample.task.manager.core.theme.ExtraLargeRadius
 import sample.task.manager.core.theme.LargeRadius
 import sample.task.manager.core.theme.disable
+import sample.task.manager.core.theme.divider
 import sample.task.manager.core.theme.onDisable
 import sample.task.manager.core.theme.w400
 import sample.task.manager.core.theme.w500
@@ -71,6 +73,50 @@ import sample.task.manager.core.theme.x2
 import sample.task.manager.core.theme.x3
 import sample.task.manager.core.util.extensions.appShadow
 import sample.task.manager.core.util.snackBar.AppSnackBarHost
+
+val DividerThickness = 0.2.dp
+
+@Composable
+fun AppDivider(
+    modifier: Modifier = Modifier
+) = Divider(
+    modifier = modifier,
+    color = MaterialTheme.colorScheme.divider,
+    thickness = DividerThickness
+)
+
+@Composable
+fun AppDivider(
+    modifier: Modifier = Modifier,
+    spacing: Dp = 0.dp
+) = AppDivider(
+    modifier = modifier.padding(start = spacing, end = spacing)
+)
+
+@Composable
+fun AppDivider(
+    modifier: Modifier = Modifier,
+    top: Dp = 0.dp,
+    bottom: Dp = 0.dp,
+    end: Dp = 0.dp,
+    start: Dp = 0.dp
+) = AppDivider(
+    modifier = modifier.padding(top = top, bottom = bottom, start = start, end = end)
+)
+
+@Composable
+fun AppDivider(
+    modifier: Modifier = Modifier,
+    vertical: Dp = 0.dp,
+    horizontal: Dp = 0.dp
+) = AppDivider(
+    modifier = modifier.padding(
+        top = vertical,
+        bottom = vertical,
+        start = horizontal,
+        end = horizontal
+    )
+)
 
 @Composable
 fun AppCard(
