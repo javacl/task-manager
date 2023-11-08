@@ -3,6 +3,7 @@ package sample.task.manager.features.task.ui
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import sample.task.manager.core.util.viewModel.BaseViewModel
 import sample.task.manager.features.task.domain.GetTaskListLocal
@@ -16,6 +17,7 @@ class TaskListViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val taskList = getTaskListLocal()
+        .flowOn(Dispatchers.IO)
 
     init {
         getData()

@@ -7,5 +7,6 @@
 
     <string name="label_retry">Retry</string>
     <string name="label_i_realized">I realized</string>
+    <string name="label_optional">Optional</string>
 
 </resources>

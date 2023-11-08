@@ -16,8 +16,6 @@ import androidx.core.view.WindowCompat
 private val darkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
-    secondary = md_theme_dark_secondary,
-    onSecondary = md_theme_dark_onSecondary,
     background = md_theme_dark_background,
     onBackground = md_theme_dark_onBackground,
     surface = md_theme_dark_surface,
@@ -31,8 +29,6 @@ private val darkColorScheme = darkColorScheme(
 private val lightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
-    secondary = md_theme_light_secondary,
-    onSecondary = md_theme_light_onSecondary,
     background = md_theme_light_background,
     onBackground = md_theme_light_onBackground,
     surface = md_theme_light_surface,
@@ -58,6 +54,14 @@ val ColorScheme.success: Color
 val ColorScheme.onSuccess: Color
     @Composable
     get() = if (isSystemInDarkTheme()) md_theme_dark_onSuccess else md_theme_light_onSuccess
+
+val ColorScheme.disable: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) md_theme_dark_disable else md_theme_light_disable
+
+val ColorScheme.onDisable: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) md_theme_dark_onDisable else md_theme_light_onDisable
 
 @Composable
 fun AppTheme(
