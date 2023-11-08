@@ -5,11 +5,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
@@ -31,9 +34,7 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import sample.task.manager.R
 import sample.task.manager.core.theme.w300
-import sample.task.manager.core.theme.w400
 import sample.task.manager.core.theme.w500
-import sample.task.manager.core.theme.w600
 import sample.task.manager.core.theme.w700
 import sample.task.manager.core.theme.x2
 import sample.task.manager.core.theme.x4
@@ -42,8 +43,11 @@ import sample.task.manager.core.util.navigation.NavigationRoutes
 import sample.task.manager.core.util.navigation.safeNavigate
 import sample.task.manager.core.util.snackBar.showAppSnackBar
 import sample.task.manager.core.util.ui.AppBox
+import sample.task.manager.core.util.ui.AppButton
+import sample.task.manager.core.util.ui.AppCard
 import sample.task.manager.core.util.ui.AppSwipeRefresh
 import sample.task.manager.features.main.ui.theme.ThemeUtil
+import sample.task.manager.features.task.data.model.TaskModel
 
 @OptIn(
     ExperimentalMaterialApi::class,
@@ -94,8 +98,16 @@ fun TaskListScreen(
             ) {
                 stickyHeader {
                     TaskListToolbarItem(
-                        navController = navController,
-                        theme = theme
+                        theme = theme,
+                        navController = navController
+                    )
+                }
+
+                items(
+                    items = taskList ?: emptyList()
+                ) { item ->
+                    TaskListItem(
+                        item = item
                     )
                 }
             }
@@ -105,11 +117,12 @@ fun TaskListScreen(
 
 @Composable
 fun TaskListToolbarItem(
-    navController: NavController,
-    theme: Int?
+    theme: Int?,
+    navController: NavController
 ) {
     Row(
         modifier = Modifier
+            .padding(bottom = 16.dp)
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
             .padding(start = 16.dp, top = 16.dp, bottom = 16.dp, end = 8.dp),
@@ -149,5 +162,71 @@ fun TaskListToolbarItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
+    }
+}
+
+@Composable
+fun TaskListItem(
+    item: TaskModel
+) {
+    AppCard(
+        modifier = Modifier
+            .padding(end = 16.dp, start = 16.dp, bottom = 16.dp)
+            .fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = item.text,
+                style = MaterialTheme.typography.w500.x4,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Row(
+                modifier = Modifier
+                    .padding(top = 24.dp)
+                    .align(Alignment.End)
+            ) {
+                if (item.time != null) {
+
+                    AppButton(
+                        text = stringResource(id = R.string.label_add_alarm),
+                        contentColor = MaterialTheme.colorScheme.primary,
+                        backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.04f),
+                        height = 40.dp,
+                        isWrap = true,
+                        wrapPadding = 16.dp
+                    ) {
+                    }
+
+                } else {
+
+                    AppButton(
+                        text = stringResource(id = R.string.label_delete_alarm),
+                        contentColor = MaterialTheme.colorScheme.error,
+                        backgroundColor = MaterialTheme.colorScheme.error.copy(alpha = 0.04f),
+                        height = 40.dp,
+                        isWrap = true,
+                        wrapPadding = 16.dp
+                    ) {
+                    }
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    AppButton(
+                        text = stringResource(id = R.string.label_edit_alarm),
+                        contentColor = MaterialTheme.colorScheme.primary,
+                        backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.04f),
+                        height = 40.dp,
+                        isWrap = true,
+                        wrapPadding = 16.dp
+                    ) {
+                    }
+                }
+            }
+        }
     }
 }

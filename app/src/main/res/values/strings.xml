@@ -16,5 +16,8 @@
     <string name="label_dark">Dark</string>
     <string name="label_selected">Selected</string>
     <string name="label_choose_theme">Select theme</string>
+    <string name="label_add_alarm">Add alarm</string>
+    <string name="label_edit_alarm">Edit alarm</string>
+    <string name="label_delete_alarm">Delete alarm</string>
 
 </resources>

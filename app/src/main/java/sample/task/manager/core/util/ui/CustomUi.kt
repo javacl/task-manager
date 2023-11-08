@@ -138,6 +138,7 @@ fun AppButton(
     modifier: Modifier = Modifier,
     height: Dp = 48.dp,
     isWrap: Boolean = false,
+    wrapPadding: Dp = if (isWrap) 32.dp else 0.dp,
     isBorder: Boolean = false,
     borderWidth: Dp = 1.dp,
     enabled: Boolean = true,
@@ -147,11 +148,11 @@ fun AppButton(
     contentColor: Color = MaterialTheme.colorScheme.onPrimary,
     disabledContentColor: Color = MaterialTheme.colorScheme.onDisable,
     shape: Shape = MaterialTheme.shapes.large,
+    text: String? = null,
+    textStyle: TextStyle = MaterialTheme.typography.w700.x2,
     iconResource: Int? = null,
     iconSize: Dp = 16.dp,
-    iconPadding: Dp = 8.dp,
-    text: String,
-    textStyle: TextStyle = MaterialTheme.typography.w700.x2,
+    iconPadding: Dp = if (text.isNullOrEmpty()) 0.dp else 8.dp,
     onClick: () -> Unit
 ) {
     val isEnabled = enabled && !loading
@@ -167,60 +168,60 @@ fun AppButton(
         disabledContentColor
     }
 
-    Box(
+    Row(
         modifier = modifier
+            .then(
+                if (isWrap) {
+                    Modifier.wrapContentWidth()
+                } else {
+                    Modifier.fillMaxWidth()
+                }
+            )
+            .height(height)
             .appShadow(cornersRadius = LargeRadius)
             .clip(shape)
-    ) {
-        Row(
-            modifier = Modifier
-                .then(
-                    if (isWrap) {
-                        Modifier.wrapContentWidth()
-                    } else {
-                        Modifier.fillMaxWidth()
-                    }
-                )
-                .height(height)
-                .then(
-                    if (isBorder) {
-                        Modifier.border(
-                            width = borderWidth,
-                            color = mBackgroundColor,
-                            shape = shape
-                        )
-                    } else {
-                        Modifier.background(mBackgroundColor)
-                    }
-                )
-                .clickable(
-                    onClick = onClick,
-                    enabled = isEnabled
-                )
-                .padding(horizontal = if (isWrap) 32.dp else 0.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-
-            if (loading) {
-
-                AppCircularProgressIndicator()
-
-            } else {
-
-                iconResource?.let {
-                    Icon(
-                        modifier = Modifier
-                            .padding(end = iconPadding)
-                            .size(iconSize),
-                        painter = painterResource(id = it),
-                        contentDescription = null,
-                        tint = mContentColor
+            .then(
+                if (isBorder) {
+                    Modifier.border(
+                        width = borderWidth,
+                        color = mBackgroundColor,
+                        shape = shape
                     )
+                } else {
+                    Modifier.background(mBackgroundColor)
                 }
+            )
+            .clickable(
+                onClick = onClick,
+                enabled = isEnabled
+            )
+            .padding(horizontal = wrapPadding),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
 
+        if (loading) {
+
+            AppCircularProgressIndicator(
+                color = mContentColor
+            )
+
+        } else {
+
+            iconResource?.let {
+                Icon(
+                    modifier = Modifier
+                        .padding(end = iconPadding)
+                        .size(iconSize),
+                    painter = painterResource(id = it),
+                    contentDescription = null,
+                    tint = mContentColor
+                )
+            }
+
+            text?.let {
                 Text(
-                    text = text,
+                    text = it,
                     style = textStyle,
                     color = mContentColor,
                     maxLines = 1,
