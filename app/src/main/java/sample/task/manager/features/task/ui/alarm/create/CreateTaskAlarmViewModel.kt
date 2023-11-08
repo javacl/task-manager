@@ -6,6 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import sample.task.manager.core.util.navigation.NavigationKey
 import sample.task.manager.core.util.viewModel.BaseViewModel
@@ -37,6 +40,27 @@ class CreateTaskAlarmViewModel @Inject constructor(
 
     private val _notValidSecondsFromNow = MutableStateFlow(false)
     val notValidSecondsFromNow = _notValidSecondsFromNow.asStateFlow()
+
+    init {
+
+        task
+            .onEach {
+
+                if (it?.time != null) {
+
+                    val seconds = (it.time - System.currentTimeMillis()) / 1000L
+
+                    if (seconds > 0) {
+                        setSecondsLaterFromNow(seconds.toString())
+                    }
+                }
+
+                setTitle(it?.title ?: "")
+                setDescription(it?.description ?: "")
+            }
+            .flowOn(Dispatchers.IO)
+            .launchIn(viewModelScope)
+    }
 
     fun setSecondsLaterFromNow(value: String) {
         if (value.length <= 6) {
