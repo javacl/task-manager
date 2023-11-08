@@ -5,6 +5,8 @@
     <string name="error_general">A problem occurred!</string>
     <string name="error_connection">Connect to Internet</string>
 
+    <string name="msg_invalid_inputs">This entry appears to be invalid.</string>
+
     <string name="txt_app_detail">alarm manager for tasks</string>
 
     <string name="label_app_name">Task manager</string>
@@ -21,6 +23,10 @@
     <string name="label_delete_alarm">Delete alarm</string>
     <string name="label_please_no_delete">No, please don\'t delete it</string>
     <string name="label_yes_delete">Yes, delete it</string>
+    <string name="label_time">Time</string>
+    <string name="label_title">Title</string>
+    <string name="label_description">Description</string>
+    <string name="label_submit">Submit</string>
 
     <string name="param_sure_delete_alarm">Are you sure to delete %s alarms?</string>
 

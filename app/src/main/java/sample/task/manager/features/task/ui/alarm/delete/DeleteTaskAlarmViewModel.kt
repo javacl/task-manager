@@ -26,6 +26,7 @@ class DeleteTaskAlarmViewModel @Inject constructor(
 
     fun deleteTaskAlarm() {
         viewModelScope.launch(Dispatchers.IO) {
+            networkLoading()
             observeNetworkState(
                 doDeleteTaskAlarmLocal(id)
             )
