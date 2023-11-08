@@ -16,8 +16,12 @@
     <string name="label_dark">Dark</string>
     <string name="label_selected">Selected</string>
     <string name="label_choose_theme">Select theme</string>
-    <string name="label_add_alarm">Add alarm</string>
+    <string name="label_create_alarm">Create alarm</string>
     <string name="label_edit_alarm">Edit alarm</string>
     <string name="label_delete_alarm">Delete alarm</string>
+    <string name="label_please_no_delete">No, please don\'t delete it</string>
+    <string name="label_yes_delete">Yes, delete it</string>
+
+    <string name="param_sure_delete_alarm">Are you sure to delete %s alarms?</string>
 
 </resources>

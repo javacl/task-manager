@@ -107,7 +107,15 @@ fun TaskListScreen(
                     items = taskList ?: emptyList()
                 ) { item ->
                     TaskListItem(
-                        item = item
+                        item = item,
+                        onCreateClick = {
+                            val route = NavigationRoutes.CreateTaskAlarm.route + "/${item.id}"
+                            navController.safeNavigate(route)
+                        },
+                        onDeleteClick = {
+                            val route = NavigationRoutes.DeleteTaskAlarm.route + "/${item.id}"
+                            navController.safeNavigate(route)
+                        }
                     )
                 }
             }
@@ -167,7 +175,9 @@ fun TaskListToolbarItem(
 
 @Composable
 fun TaskListItem(
-    item: TaskModel
+    item: TaskModel,
+    onCreateClick: () -> Unit,
+    onDeleteClick: () -> Unit
 ) {
     AppCard(
         modifier = Modifier
@@ -193,14 +203,14 @@ fun TaskListItem(
                 if (item.time != null) {
 
                     AppButton(
-                        text = stringResource(id = R.string.label_add_alarm),
+                        text = stringResource(id = R.string.label_create_alarm),
                         contentColor = MaterialTheme.colorScheme.primary,
                         backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.04f),
                         height = 40.dp,
                         isWrap = true,
-                        wrapPadding = 16.dp
-                    ) {
-                    }
+                        wrapPadding = 16.dp,
+                        onClick = onCreateClick
+                    )
 
                 } else {
 
@@ -210,9 +220,9 @@ fun TaskListItem(
                         backgroundColor = MaterialTheme.colorScheme.error.copy(alpha = 0.04f),
                         height = 40.dp,
                         isWrap = true,
-                        wrapPadding = 16.dp
-                    ) {
-                    }
+                        wrapPadding = 16.dp,
+                        onClick = onDeleteClick
+                    )
 
                     Spacer(modifier = Modifier.width(8.dp))
 
@@ -222,9 +232,9 @@ fun TaskListItem(
                         backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.04f),
                         height = 40.dp,
                         isWrap = true,
-                        wrapPadding = 16.dp
-                    ) {
-                    }
+                        wrapPadding = 16.dp,
+                        onClick = onCreateClick
+                    )
                 }
             }
         }

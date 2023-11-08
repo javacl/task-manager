@@ -23,6 +23,10 @@ import sample.task.manager.features.main.ui.theme.ThemeListScreen
 import sample.task.manager.features.main.ui.theme.ThemeListViewModel
 import sample.task.manager.features.task.ui.TaskListScreen
 import sample.task.manager.features.task.ui.TaskListViewModel
+import sample.task.manager.features.task.ui.alarm.create.CreateTaskAlarmScreen
+import sample.task.manager.features.task.ui.alarm.create.CreateTaskAlarmViewModel
+import sample.task.manager.features.task.ui.alarm.delete.DeleteTaskAlarmScreen
+import sample.task.manager.features.task.ui.alarm.delete.DeleteTaskAlarmViewModel
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -72,6 +76,24 @@ fun MainScreen(
                 ) {
                     val viewModel = hiltViewModel<ThemeListViewModel>(it)
                     ThemeListScreen(
+                        navController = navController,
+                        viewModel = viewModel
+                    )
+                }
+                bottomSheet(
+                    route = NavigationRoutes.DeleteTaskAlarm.route
+                ) {
+                    val viewModel = hiltViewModel<DeleteTaskAlarmViewModel>(it)
+                    DeleteTaskAlarmScreen(
+                        navController = navController,
+                        viewModel = viewModel
+                    )
+                }
+                bottomSheet(
+                    route = NavigationRoutes.CreateTaskAlarm.route
+                ) {
+                    val viewModel = hiltViewModel<CreateTaskAlarmViewModel>(it)
+                    CreateTaskAlarmScreen(
                         navController = navController,
                         viewModel = viewModel
                     )

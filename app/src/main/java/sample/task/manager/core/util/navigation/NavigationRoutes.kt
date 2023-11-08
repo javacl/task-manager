@@ -16,4 +16,12 @@ sealed class NavigationRoutes(val route: String) {
     data object TaskList : NavigationRoutes(
         route = "task_list"
     )
+
+    data object CreateTaskAlarm : NavigationRoutes(
+        route = "create_task_alarm/{${NavigationKey.KEY_ID}}"
+    )
+
+    data object DeleteTaskAlarm : NavigationRoutes(
+        route = "delete_task_alarm/{${NavigationKey.KEY_ID}}"
+    )
 }
