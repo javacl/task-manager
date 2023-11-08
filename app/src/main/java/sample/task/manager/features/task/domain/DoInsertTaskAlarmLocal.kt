@@ -41,8 +41,8 @@ class DoInsertTaskAlarmLocal @Inject constructor(
 
         val validate = CreateTaskAlarmValidationError()
 
-        if (secondsLaterFromNow < 1) {
-            validate.secondsLaterFromNow.add(ValidateKeys.InvalidInputs)
+        if (secondsLaterFromNow < 5) {
+            validate.secondsLaterFromNow.add(ValidateKeys.MinSeconds)
         }
 
         return validate
