@@ -200,7 +200,7 @@ fun TaskListItem(
                     .padding(top = 24.dp)
                     .align(Alignment.End)
             ) {
-                if (item.time != null) {
+                if (item.time == null) {
 
                     AppButton(
                         text = stringResource(id = R.string.label_create_alarm),

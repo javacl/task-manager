@@ -4,9 +4,9 @@ import sample.task.manager.core.util.ValidateKeys
 
 class CreateTaskAlarmValidationError {
 
-    val time: ArrayList<ValidateKeys> = ArrayList()
+    val secondsLaterFromNow: ArrayList<ValidateKeys> = ArrayList()
 
     fun isValid(): Boolean {
-        return time.size <= 0
+        return secondsLaterFromNow.size <= 0
     }
 }

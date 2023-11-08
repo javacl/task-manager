@@ -12,18 +12,22 @@ class DoInsertTaskAlarmLocal @Inject constructor(
 ) {
     suspend operator fun invoke(
         id: Int,
-        time: Long,
+        secondsLaterFromNow: String,
         title: String,
         description: String
     ): ApiResult<Unit> {
 
-        val validate = validateCreateTaskAlarm(time = time)
+        val mSecondsLaterFromNow = secondsLaterFromNow.toLongOrNull() ?: 0L
+
+        val validate = validateCreateTaskAlarm(
+            secondsLaterFromNow = mSecondsLaterFromNow
+        )
 
         return if (validate.isValid()) {
             ApiResult.Success(
                 taskRepository.insertTaskAlarmLocal(
                     id = id,
-                    time = time,
+                    time = System.currentTimeMillis() + (mSecondsLaterFromNow * 1000L),
                     title = title,
                     description = description
                 )
@@ -31,12 +35,14 @@ class DoInsertTaskAlarmLocal @Inject constructor(
         } else ApiResult.Error(Exceptions.ValidationException(validate))
     }
 
-    private fun validateCreateTaskAlarm(time: Long): CreateTaskAlarmValidationError {
+    private fun validateCreateTaskAlarm(
+        secondsLaterFromNow: Long
+    ): CreateTaskAlarmValidationError {
 
         val validate = CreateTaskAlarmValidationError()
 
-        if (time < System.currentTimeMillis() + 5000) {
-            validate.time.add(ValidateKeys.InvalidInputs)
+        if (secondsLaterFromNow < 1) {
+            validate.secondsLaterFromNow.add(ValidateKeys.InvalidInputs)
         }
 
         return validate

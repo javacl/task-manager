@@ -26,8 +26,8 @@ class CreateTaskAlarmViewModel @Inject constructor(
 
     val task = getTaskLocal(id)
 
-    private val _time = MutableStateFlow(0L)
-    val time = _time.asStateFlow()
+    private val _secondsLaterFromNow = MutableStateFlow("")
+    val secondsLaterFromNow = _secondsLaterFromNow.asStateFlow()
 
     private val _title = MutableStateFlow("")
     val title = _title.asStateFlow()
@@ -35,12 +35,14 @@ class CreateTaskAlarmViewModel @Inject constructor(
     private val _description = MutableStateFlow("")
     val description = _description.asStateFlow()
 
-    private val _notValidTime = MutableStateFlow(false)
-    val notValidTime = _notValidTime.asStateFlow()
+    private val _notValidSecondsFromNow = MutableStateFlow(false)
+    val notValidSecondsFromNow = _notValidSecondsFromNow.asStateFlow()
 
-    fun setTime(value: Long) {
-        _time.value = value
-        setNotValidTime(false)
+    fun setSecondsLaterFromNow(value: String) {
+        if (value.length <= 6) {
+            _secondsLaterFromNow.value = value.filter { it.isDigit() }
+            setNotValidSecondsLaterFromNow(false)
+        }
     }
 
     fun setTitle(value: String) {
@@ -55,8 +57,8 @@ class CreateTaskAlarmViewModel @Inject constructor(
         }
     }
 
-    fun setNotValidTime(value: Boolean) {
-        _notValidTime.value = value
+    fun setNotValidSecondsLaterFromNow(value: Boolean) {
+        _notValidSecondsFromNow.value = value
     }
 
     fun insertTaskAlarm() {
@@ -65,7 +67,7 @@ class CreateTaskAlarmViewModel @Inject constructor(
             observeNetworkState(
                 doInsertTaskAlarmLocal(
                     id = id,
-                    time = _time.value,
+                    secondsLaterFromNow = _secondsLaterFromNow.value,
                     title = _title.value,
                     description = _description.value
                 )

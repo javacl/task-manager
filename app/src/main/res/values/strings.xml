@@ -23,7 +23,7 @@
     <string name="label_delete_alarm">Delete alarm</string>
     <string name="label_please_no_delete">No, please don\'t delete it</string>
     <string name="label_yes_delete">Yes, delete it</string>
-    <string name="label_time">Time</string>
+    <string name="label_seconds_later_from_now">Seconds later from now</string>
     <string name="label_title">Title</string>
     <string name="label_description">Description</string>
     <string name="label_submit">Submit</string>
