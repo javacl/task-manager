@@ -82,31 +82,5 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
-
-        /*val alarmManager = getSystemService(AlarmManager::class.java)
-
-        val intent = Intent(this, AlarmReceiver::class.java)
-
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis() + 1000,
-            PendingIntent.getBroadcast(
-                this,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-        )
-
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis() + 10000,
-            PendingIntent.getBroadcast(
-                this,
-                1,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-        )*/
     }
 }

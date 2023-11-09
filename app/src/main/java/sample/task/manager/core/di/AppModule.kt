@@ -21,6 +21,8 @@ import sample.task.manager.core.api.DefaultIfNullFactory
 import sample.task.manager.core.api.TLSSocketFactory
 import sample.task.manager.core.db.AppDb
 import sample.task.manager.core.preferences.PreferencesDataStore
+import sample.task.manager.core.util.alarmManager.AppAlarmManager
+import sample.task.manager.core.util.notification.AppNotificationManager
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -99,4 +101,16 @@ object AppModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideAppAlarmManager(
+        @ApplicationContext context: Context
+    ): AppAlarmManager = AppAlarmManager(context)
+
+    @Singleton
+    @Provides
+    fun provideAppNotificationManager(
+        @ApplicationContext context: Context
+    ): AppNotificationManager = AppNotificationManager(context)
 }

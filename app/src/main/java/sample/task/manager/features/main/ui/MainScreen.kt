@@ -1,5 +1,7 @@
 package sample.task.manager.features.main.ui
 
+import android.Manifest
+import android.os.Build
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -7,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -16,6 +19,8 @@ import sample.task.manager.core.util.accompanist.navigationMaterial.Experimental
 import sample.task.manager.core.util.accompanist.navigationMaterial.ModalBottomSheetLayout
 import sample.task.manager.core.util.accompanist.navigationMaterial.bottomSheet
 import sample.task.manager.core.util.accompanist.navigationMaterial.rememberBottomSheetNavigator
+import sample.task.manager.core.util.accompanist.permissions.ExperimentalPermissionsApi
+import sample.task.manager.core.util.accompanist.permissions.rememberPermissionState
 import sample.task.manager.core.util.navigation.NavigationRoutes
 import sample.task.manager.core.util.snackBar.AppSnackBarHost
 import sample.task.manager.core.util.snackBar.SnackBarType
@@ -28,7 +33,10 @@ import sample.task.manager.features.task.ui.alarm.create.CreateTaskAlarmViewMode
 import sample.task.manager.features.task.ui.alarm.delete.DeleteTaskAlarmScreen
 import sample.task.manager.features.task.ui.alarm.delete.DeleteTaskAlarmViewModel
 
-@OptIn(ExperimentalMaterialNavigationApi::class)
+@OptIn(
+    ExperimentalMaterialNavigationApi::class,
+    ExperimentalPermissionsApi::class
+)
 @Composable
 fun MainScreen(
     theme: Int?,
@@ -38,6 +46,17 @@ fun MainScreen(
     val bottomSheetNavigator = rememberBottomSheetNavigator()
 
     val navController = rememberNavController(bottomSheetNavigator)
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+        val locationPermissionState = rememberPermissionState(
+            Manifest.permission.POST_NOTIFICATIONS
+        )
+
+        SideEffect {
+            locationPermissionState.launchPermissionRequest()
+        }
+    }
 
     ModalBottomSheetLayout(
         bottomSheetNavigator = bottomSheetNavigator,

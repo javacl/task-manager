@@ -3,12 +3,15 @@ package sample.task.manager.features.task.domain
 import sample.task.manager.core.api.ApiResult
 import sample.task.manager.core.api.Exceptions
 import sample.task.manager.core.util.ValidateKeys
+import sample.task.manager.core.util.alarmManager.AlarmManagerType
+import sample.task.manager.core.util.alarmManager.domain.DoScheduleAlarmManager
 import sample.task.manager.features.task.data.TaskRepository
 import sample.task.manager.features.task.domain.validation.CreateTaskAlarmValidationError
 import javax.inject.Inject
 
 class DoInsertTaskAlarmLocal @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val doScheduleAlarmManager: DoScheduleAlarmManager
 ) {
     suspend operator fun invoke(
         id: Int,
@@ -24,10 +27,19 @@ class DoInsertTaskAlarmLocal @Inject constructor(
         )
 
         return if (validate.isValid()) {
+
+            val time = System.currentTimeMillis() + (mSecondsLaterFromNow * 1000L)
+
+            doScheduleAlarmManager(
+                type = AlarmManagerType.Task,
+                id = id,
+                time = time
+            )
+
             ApiResult.Success(
                 taskRepository.insertTaskAlarmLocal(
                     id = id,
-                    time = System.currentTimeMillis() + (mSecondsLaterFromNow * 1000L),
+                    time = time,
                     title = title,
                     description = description
                 )
