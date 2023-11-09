@@ -1,8 +1,8 @@
 package sample.task.manager.core.api
 
 import android.util.Log
-import sample.task.manager.core.model.AppError
 import org.json.JSONObject
+import sample.task.manager.core.model.AppError
 
 /**
  * Wrap a suspending API [call] in try/catch. In case an exception is thrown, a [ApiResult.Error] is

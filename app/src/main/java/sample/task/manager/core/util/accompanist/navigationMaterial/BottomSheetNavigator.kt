@@ -41,11 +41,11 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.NavigatorState
-import sample.task.manager.core.util.accompanist.navigationMaterial.BottomSheetNavigator.Destination
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.transform
+import sample.task.manager.core.util.accompanist.navigationMaterial.BottomSheetNavigator.Destination
 
 /**
  * The state of a [ModalBottomSheetLayout] that the [BottomSheetNavigator] drives

@@ -1,7 +1,7 @@
 package sample.task.manager.core.util
 
 import android.content.Context
-import java.util.*
+import java.util.Locale
 
 fun localizedContext(baseContext: Context, locale: Locale = Locale("en")): Context {
     Locale.setDefault(locale)

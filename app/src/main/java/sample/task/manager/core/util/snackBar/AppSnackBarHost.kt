@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import sample.task.manager.core.util.ui.AppCard
 import sample.task.manager.R
 import sample.task.manager.core.theme.onSuccess
 import sample.task.manager.core.theme.onWarning
@@ -26,6 +25,7 @@ import sample.task.manager.core.theme.w400
 import sample.task.manager.core.theme.w600
 import sample.task.manager.core.theme.warning
 import sample.task.manager.core.theme.x2
+import sample.task.manager.core.util.ui.AppCard
 
 @Composable
 fun AppSnackBarHost(

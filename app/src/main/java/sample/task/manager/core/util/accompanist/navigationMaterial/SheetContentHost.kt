@@ -25,8 +25,6 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.LocalOwnersProvider
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
-import sample.task.manager.core.util.accompanist.navigationMaterial.BottomSheetNavigator
-import sample.task.manager.core.util.accompanist.navigationMaterial.ExperimentalMaterialNavigationApi
 
 /**
  * Hosts a [BottomSheetNavigator.Destination]'s [NavBackStackEntry] and its
