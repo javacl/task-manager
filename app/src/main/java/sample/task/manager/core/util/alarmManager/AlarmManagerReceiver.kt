@@ -3,51 +3,36 @@ package sample.task.manager.core.util.alarmManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
-import sample.task.manager.core.util.notification.AppNotificationManager
-import sample.task.manager.features.task.domain.DoDeleteTaskAlarmLocal
-import sample.task.manager.features.task.domain.GetTaskLocal
+import sample.task.manager.core.util.workManager.AlarmManagerWorker
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AlarmManagerReceiver : BroadcastReceiver() {
 
     @Inject
-    lateinit var getTaskLocal: GetTaskLocal
-
-    @Inject
-    lateinit var appNotificationManager: AppNotificationManager
-
-    @Inject
-    lateinit var doDeleteTaskAlarmLocal: DoDeleteTaskAlarmLocal
+    lateinit var workManager: WorkManager
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        when (intent?.getStringExtra(AppAlarmManager.KEY_ALARM_MANAGER_TYPE)) {
+        if (intent != null) {
 
-            AlarmManagerType.Task.name -> {
+            val type = intent.getStringExtra(AppAlarmManager.KEY_ALARM_MANAGER_TYPE)
 
-                val id = intent.getIntExtra(AppAlarmManager.KEY_ALARM_MANAGER_ID, 0)
+            val id = intent.getIntExtra(AppAlarmManager.KEY_ALARM_MANAGER_ID, 0)
 
-                val task = runBlocking { getTaskLocal(id).first() }
-
-                task?.run {
-                    appNotificationManager.notify(
-                        id = id,
-                        title = text,
-                        content = title ?: description ?: ""
-                    )
-                }
-
-                runBlocking {
-                    doDeleteTaskAlarmLocal(id)
-                }
-            }
+            workManager.enqueue(
+                OneTimeWorkRequestBuilder<AlarmManagerWorker>()
+                    .setInputData(
+                        Data.Builder()
+                            .putString(AppAlarmManager.KEY_ALARM_MANAGER_TYPE, type)
+                            .putInt(AppAlarmManager.KEY_ALARM_MANAGER_ID, id)
+                            .build()
+                    ).build()
+            )
         }
-
-        Log.d("kir", "kira")
     }
 }
