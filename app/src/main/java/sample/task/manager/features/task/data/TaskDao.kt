@@ -22,7 +22,7 @@ interface TaskDao {
     fun getTask(id: Int): Flow<TaskDto?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTaskList(value: List<TaskEntity>?)
+    suspend fun insertTaskList(value: List<TaskEntity>)
 
     @Query("DELETE FROM TaskEntity")
     suspend fun deleteTaskList()
@@ -33,7 +33,7 @@ interface TaskDao {
     fun getTaskAlarmList(): Flow<List<TaskAlarmEntity>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTaskAlarm(value: TaskAlarmEntity?)
+    suspend fun insertTaskAlarm(value: TaskAlarmEntity)
 
     @Query("DELETE FROM TaskAlarmEntity WHERE taskId = :id")
     suspend fun deleteTaskAlarm(id: Int)
