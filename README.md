@@ -5,10 +5,8 @@ When you create an alarm, you can define how many seconds later the alarm will b
 You can also change the program theme from the top of the page.
 
 <p align="center">
- <img src='[https://user-images.githubusercontent.com/45559398/172485205-6fa4e496-4661-49ff-90f1-7bacf2ea529a.gif](https://github-production-user-asset-6210df.s3.amazonaws.com/45559398/281691177-b7f84a25-74f4-4760-a63f-0d2ac477a939.gif)' width='300'>
+ <img src='https://github-production-user-asset-6210df.s3.amazonaws.com/45559398/281691177-b7f84a25-74f4-4760-a63f-0d2ac477a939.gif' width='500'>
 </p>
-
-![video_2023-11-09_13-15-05](https://github.com/javacl/task-manager/assets/45559398/b7f84a25-74f4-4760-a63f-0d2ac477a939)
 
 ### The basic flow
 <p align="center">
