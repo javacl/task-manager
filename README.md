@@ -5,7 +5,7 @@ When you create an alarm, you can define how many seconds later the alarm will b
 You can also change the program theme from the top of the page.
 
 <p align="center">
- <img src='https://github-production-user-asset-6210df.s3.amazonaws.com/45559398/281691177-b7f84a25-74f4-4760-a63f-0d2ac477a939.gif' width='200'>
+ <img src='https://github-production-user-asset-6210df.s3.amazonaws.com/45559398/281691177-b7f84a25-74f4-4760-a63f-0d2ac477a939.gif' width='100'>
 </p>
 
 ### The basic flow
