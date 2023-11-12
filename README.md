@@ -1,5 +1,5 @@
 # Task manager
-##### Sample set alarm for tasks
+#### A Sample set alarm for tasks
 At first, the list of tasks is taken from the server.
 You can create, edit and delete alarms.
 When you create an alarm, you can define how many seconds later the alarm will be shown to you, and then you can add a title and description to it.
